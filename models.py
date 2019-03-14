@@ -26,6 +26,6 @@ class Article(db.Model):
         print(self.title)
 
 db.create_all()
-
-
-
+#
+#test
+#
