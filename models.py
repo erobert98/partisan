@@ -1,13 +1,15 @@
 from active_alchemy import ActiveAlchemy
 from sqlalchemy import ForeignKey
 from article_grabber import load_info
+from find_website import find_site
+from db_utility import find_DBentry
 
 
 db = ActiveAlchemy("sqlite:///fooreal.db")
 
 class Website(db.Model):
 
-    title = db.Column(db.String(50))
+    name = db.Column(db.String(50))
     description = db.Column(db.String(50))
     leaning = db.Column(db.String(50))
     articles = db.relationship('Article')
@@ -27,6 +29,10 @@ class Article(db.Model):
     def load_info(self):
         text, authors, description = load_info(self)
         self.update(text = text, author = authors, description = description)
+
+    def load_website(self):
+        websiteName = find_site(self.url)
+        find_dbEntry('website', websiteName)
         
 
 db.create_all()
