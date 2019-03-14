@@ -1,0 +1,2 @@
+Active-Alchemy==1.0.0
+Newspaper3k==0.2.8
