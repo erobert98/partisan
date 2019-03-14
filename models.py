@@ -2,10 +2,9 @@ from active_alchemy import ActiveAlchemy
 from sqlalchemy import ForeignKey
 from article_grabber import load_info
 from find_website import find_site
-from db_utility import find_DBentry
 
 
-db = ActiveAlchemy("sqlite:///fooreal.db")
+db = ActiveAlchemy("sqlite:///foorealtho.db")
 
 class Website(db.Model):
 
@@ -27,12 +26,25 @@ class Article(db.Model):
 
     # @classmethod
     def load_info(self):
-        text, authors, description = load_info(self)
-        self.update(text = text, author = authors, description = description)
+        text, authors, description, title = load_info(self)
+        self.update(text = text, author = authors, description = description, title = title)
 
     def load_website(self):
         websiteName = find_site(self.url)
-        find_dbEntry('website', websiteName)
+        siteID = find_dbEntry('website', websiteName)
+        print(siteID)
         
 
 db.create_all()
+
+def find_dbEntry(dbType, entryName):
+    if dbType == 'website':
+        site = Website.query().filter(Website.name == entryName).first()
+        if site is not None:
+            return site.id
+        else:
+            W = Website.create(name = entryName)
+            return W.id
+        
+
+

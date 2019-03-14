@@ -9,5 +9,5 @@ def load_info(article):
     A.download()
     A.parse()
     A.nlp()
-    return A.text, A.authors, A.summary
+    return A.text, A.authors, A.summary, A.title
     
