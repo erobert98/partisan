@@ -32,7 +32,7 @@ class Article(db.Model):
 
     def load_website(self):
         websiteName = find_site(self.url)
-        siteID = find_dbEntry('website', websiteName)
+        siteID = find_dbEntry('website', websiteName)  #HERE LIES THE PROBLEM 
         print(siteID)
         
 
