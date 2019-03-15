@@ -2,6 +2,7 @@ from active_alchemy import ActiveAlchemy
 from sqlalchemy import ForeignKey
 from article_grabber import load_info
 from find_website import find_site
+from db_utility import find_dbEntry
 
 
 db = ActiveAlchemy("sqlite:///foorealtho.db")
@@ -36,15 +37,5 @@ class Article(db.Model):
         
 
 db.create_all()
-
-def find_dbEntry(dbType, entryName):
-    if dbType == 'website':
-        site = Website.query().filter(Website.name == entryName).first()
-        if site is not None:
-            return site.id
-        else:
-            W = Website.create(name = entryName)
-            return W.id
-        
 
 
