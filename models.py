@@ -33,7 +33,10 @@ class Article(db.Model):
     def load_website(self):
         websiteName = find_site(self.url)
         siteID = find_dbEntry('website', websiteName)  #HERE LIES THE PROBLEM 
-        print(siteID)
+        if siteID is False:
+            W = Website.create(name = websiteName) #hwo do i make every website do something
+        else:
+            print('2')
         
 
 db.create_all()

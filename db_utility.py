@@ -10,12 +10,13 @@ def find_dbEntry(dbType, entryName):
     Session = sessionmaker(bind=some_engine)
     session = Session()
     if dbType == 'website':
-        site = session.query('Website').filter_by(name = entryName).first() # HOW DO I USE WEBSITE WITHOUT THE MODEL.PY
-        if site is not None:
-            print('1')
-            return site.id
-        else:
+        try:
+            site = session.query('Website').filter_by(name = entryName).first() # HOW DO I USE WEBSITE WITHOUT THE MODEL.PY
+            if site is not None:
+                print('1')
+                return site.id
+        except:
             print('2')
             # W = Website.create(name = entryName)
-            return W.id
+            return False
         
