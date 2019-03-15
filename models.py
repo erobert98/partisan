@@ -9,7 +9,7 @@ db = ActiveAlchemy("sqlite:///foorealtho.db")
 
 class Website(db.Model):
 
-    name = db.Column(db.String(50))
+    name = db.Column(db.String(50), unique=True)
     description = db.Column(db.String(50))
     leaning = db.Column(db.String(50))
     articles = db.relationship('Article')
@@ -25,7 +25,7 @@ class Article(db.Model):
     description = db.Column(db.String(50))
     tag = db.Column(db.String(50))
     text = db.Column(db.String(50))
-    url = db.Column(db.String(50))
+    url = db.Column(db.String(50), unique=True)
     website_id = db.Column(db.Integer, ForeignKey('website.id'))
 
     # @classmethod
@@ -40,7 +40,8 @@ class Article(db.Model):
             W = Website.create(name = websiteName) #how do i make every website do something upon creation
             self.website_id = W.id
         else:
-            self.website_id = siteID
+            self.website_id = W.id
+    
             
         
 
