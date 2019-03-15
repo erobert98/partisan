@@ -14,9 +14,9 @@ class Website(db.Model):
     leaning = db.Column(db.String(50))
     articles = db.relationship('Article')
     
-    def __init__(self): #does this work 
-        find_stuff()
-        update_code()
+    # def __init__(self): #does this work 
+    #     find_stuff()
+    #     update_code()
 
 
 class Article(db.Model):
@@ -36,10 +36,12 @@ class Article(db.Model):
     def load_website(self):
         websiteName = find_site(self.url)
         siteID = find_dbEntry('website', websiteName)  #HERE LIES THE PROBLEM 
-        if siteID is False:
+        if siteID is False:  
             W = Website.create(name = websiteName) #how do i make every website do something upon creation
+            self.website_id = W.id
         else:
-            print('2')
+            self.website_id = siteID
+            
         
 
 db.create_all()
