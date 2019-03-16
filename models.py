@@ -36,6 +36,7 @@ class Article(db.Model):
  
     def __init__(self, url, do_update = True):
         self.url = url 
+        domain = self.find_site()
         if do_update:
             self.load_info()
 
@@ -47,6 +48,7 @@ class Article(db.Model):
         A.nlp()
         self.update(text = A.text, author = A.authors, description = A.summary, title = A.title)
    
+    def check_website():
 
     # def get_websiteName(self):
     #     websiteName = self.find_site()

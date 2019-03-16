@@ -2,7 +2,6 @@ from active_alchemy import ActiveAlchemy
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-
 def find_dbEntry(dbType, entryName):
     '''
     Given a type of entry and entry name, search it.

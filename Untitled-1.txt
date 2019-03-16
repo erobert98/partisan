@@ -1,0 +1,16 @@
+from models import *
+
+def main(url):
+    domain = domaininze(url)
+    site = site(url = url)
+    site.add_article(url)
+
+
+
+
+
+from models impor website
+
+class site():
+ self.site = website.get(site.id)
+s           
