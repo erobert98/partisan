@@ -15,7 +15,7 @@ def find_dbEntry(dbType, entryName):
     db = ActiveAlchemy("sqlite:///foorealtho.db")
     if dbType == 'website':
         try:
-            site = db.query('name').first()
+            site = db.engine.query(Website).first()
             print(site)
             # site = session.query(Website).filter(Website.name == entryName)
             for s in site:
