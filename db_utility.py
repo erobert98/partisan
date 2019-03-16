@@ -13,10 +13,11 @@ def find_dbEntry(dbType, entryName):
 
     '''
     db = ActiveAlchemy("sqlite:///foorealtho.db")
-
     if dbType == 'website':
         try:
-            site = db.query(Website).filter(Website.name == entryName)
+            site = db.query('name').first()
+            print(site)
+            # site = session.query(Website).filter(Website.name == entryName)
             for s in site:
                 print(s)
             # site = session.query(Website).filter_by(name = entryName).first() # HOW DO I USE WEBSITE WITHOUT THE MODEL.PY

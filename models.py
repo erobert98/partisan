@@ -40,8 +40,9 @@ class Article(db.Model):
             W = Website.create(name = websiteName) #how do i make every website do something upon creation
             self.website_id = W.id
         else:
+             
             self.website_id = W.id
-    
+            return W.id
             
         
 
