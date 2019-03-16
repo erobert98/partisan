@@ -1,6 +1,6 @@
 from active_alchemy import ActiveAlchemy
 from sqlalchemy import ForeignKey
-from find_website import find_site
+from find_website import find_domain
 from db_utility import find_dbEntry
 from newspaper import Article as NA
 from urllib.parse import urlparse
@@ -17,8 +17,8 @@ class Website(db.Model):
     leaning = db.Column(db.String(50))
     articles = db.relationship('Article')
 
-    def scrape(self):
-        scrape_site()
+    def ok(self):
+        print('hello')
     
     # def __init__(self): #does this work 
     #     find_stuff()
@@ -48,7 +48,7 @@ class Article(db.Model):
         A.nlp()
         self.update(text = A.text, author = A.authors, description = A.summary, title = A.title)
    
-    def check_website():
+    # def check_website():
 
     # def get_websiteName(self):
     #     websiteName = self.find_site()
