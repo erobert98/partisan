@@ -3,8 +3,6 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 
-
-
 def find_dbEntry(dbType, entryName):
     '''
     Given a type of entry and entry name, search it.
@@ -12,12 +10,10 @@ def find_dbEntry(dbType, entryName):
     returns the ID of the query
 
     '''
-    db = ActiveAlchemy("sqlite:///foorealtho.db")
     if dbType == 'website':
         try:
-            site = db.engine.query(Website).first()
+            # site = db.engine.query(Website).first()
             print(site)
-            # site = session.query(Website).filter(Website.name == entryName)
             for s in site:
                 print(s)
             # site = session.query(Website).filter_by(name = entryName).first() # HOW DO I USE WEBSITE WITHOUT THE MODEL.PY
