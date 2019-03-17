@@ -22,15 +22,26 @@ class Site:
             session.commit()
     
     def add_article(self, url):
-        try:
-            session = connect()
-            A = Article(url = url, website_id = self.website.id)
-            session.add(A)
-            session.commit()
-            return A
-        except IntegrityError:
-            session.rollback()
-            return False
+        if type(url) is list:
+            try:
+                for url_sing in url:
+                    session = connect()
+                    A = Article(url = url_sing, website_id = self.website.id)
+                    session.add(A)
+                    session.commit()
+            except IntegrityError:
+                session.rollback()
+                return False
+        else:
+            try:
+                session = connect()
+                A = Article(url = url, website_id = self.website.id)
+                session.add(A)
+                session.commit()
+                return A
+            except IntegrityError:
+                session.rollback()
+                return False
 
     def parse_articles(self):
         for article in self.website.articles:
@@ -41,15 +52,15 @@ class Site:
                 A.download()
                 A.parse()
                 A.nlp()
-                # session.query(Article).filter(Article.url == article.url).update({Article.text: A.text}) # 'author' = A.authors, 'description' = A.summary, 'title' = A.title})
                 article.text = A.text
                 article.author = A.authors
                 article.description = A.summary
                 article.title = A.title
+                session.merge(article)
                 session.commit()
                 return A.title
             except Exception as e:
-                print(e)
+                print(e)    
 
     def __str__(self):
         return self.domain +'=' + str(self.website)
@@ -61,7 +72,7 @@ class Site:
 
 def test():
     s = Site('https://www.buzzfeed.com/')
-    s.add_article('https://www.buzzfeednews.com/article/richardhjames/new-zealand-christchurch-mosque-shooting-terror-attack?bftwuk=&utm_term=4ldqpgm&ref=hpsplash&ref=hpsplash')
+    # s.add_article('https://www.buzzfeednews.com/article/richardhjames/new-zealand-christchurch-mosque-shooting-terror-attack?bftwuk=&utm_term=4ldqpgm&ref=hpsplash&ref=hpsplash')
     s.parse_articles()
     pass
 
