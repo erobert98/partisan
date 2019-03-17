@@ -1,4 +1,4 @@
-from models2 import *
+from models2 import connect, Website
 from find_website import find_domain
 from newspaper import Article as NA
 
@@ -14,9 +14,9 @@ def add_site():
 
 
 class Site(Website):
-    def show(self):
+
+    def show(self, Website):
         print('1')
-        print(Website)
         print(Website.title)
         # self.name = name
         # return self.name
@@ -42,11 +42,10 @@ class Site(Website):
 def test():
     session = connect()
     W = session.query(Website).first()
-    Site(W).show()
-
+    site = Site()
+    site.show(W)
+    pass
 if __name__ == "__main__":
     test()
 
 
-
-wtf

@@ -1,4 +1,5 @@
 {
-    "python.pythonPath": "env\\Scripts\\python.exe",
-    "git.ignoreLimitWarning": true
+    "python.pythonPath": "C:\\Users\\emile\\Codes\\partisanWork\\env\\Scripts\\python.exe",
+    "git.ignoreLimitWarning": true,
+    "python.venvPath": "C:\\Users\\emile\\Codes\\partisanWork"
 }
