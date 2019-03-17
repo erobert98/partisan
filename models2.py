@@ -13,15 +13,15 @@ class Website(Base):
     leaning = Column(String(50))
     articles = relationship('Article')
 
-    def add_article(self, url):
-        session = connect()
-        A = Article(url = url, website_id = self.id)
-        session.add(A)
-        session.commit()
-        print(A)
-        return A
+
+    def __init__(self, domain):
+        self.title = domain
+        Base.__init__(self)
 
 
+    print()
+    def __str__(self):
+        return f"{self.id} {self.title} hello"
     # def __init__(self): #does this work 
     #     find_stuff()
     #     update_code()
@@ -48,7 +48,7 @@ def setup():
 
 
 def connect():
-    engine = create_engine('sqlite:///foorealtho.db')
+    engine = create_engine('sqlite:///foorealtho.db',connect_args={'check_same_thread':False})
     Session = sessionmaker(bind=engine)
     session = Session()
     return session

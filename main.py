@@ -14,20 +14,28 @@ def add_site():
 
 
 class Site(Website):
+    def __init__(self, Website): #do i need to pull the attributes from db and make a new object to work from?
+        self.id = Website.id
+        self.title = Website.title
+        self.description = Website.description
+        self.articles = Website.articles
 
-    def show(self, Website):
-        print('1')
-        print(Website.title)
+    def show(self):
+        print('showing')
+        print(self.id)
         # self.name = name
         # return self.name
 
-    # def add_article(self, url):
-    #     A = NA(url)
-    #     A.download()
-    #     A.parse()
-    #     A.nlp()
-    #     self.update(text = A.text, author = A.authors, description = A.summary, title = A.title)
- 
+    def parse_articles(self):
+        for article in self.articles:
+            print(article.url)
+            A = NA(article.url)
+            A.download()
+            A.parse()
+            A.nlp()
+            self.update(text = A.text, author = A.authors, description = A.summary, title = A.title) #how this
+    
+
     #     print(Article.get(1))
     #     # Website = Website.get(self.id)
         # print('ok')
@@ -42,10 +50,16 @@ class Site(Website):
 def test():
     session = connect()
     W = session.query(Website).first()
-    site = Site()
-    site.show(W)
+    site = Site(W)
+    site.show()
+    site.add_articles()
     pass
 if __name__ == "__main__":
     test()
+
+
+def main(url):
+    site = Site(url = url)	
+    site.add_article(url)
 
 
